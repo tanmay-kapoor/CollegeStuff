@@ -2,8 +2,7 @@
    ROLL NO.- PA38
 */
 #include<stdio.h>
-int main()
-{
+int main() {
     int at[10],bt[10],x[10];
     int wt[10],tat[10],completion[10];
     int i,j,smallest,count=0,time,n;
@@ -11,32 +10,30 @@ int main()
 
     printf("\nEnter the number of Processes: ");  //Number of Processes as Input
     scanf("%d",&n);
-    for(i=0; i<n; i++)
-    {
+
+    for(i=0; i<n; i++) {
         printf("\nEnter arrival time of process: ");  //Arrival time as Input
         scanf("%d",&at[i]);
     }
-    for(i=0; i<n; i++)
-    {
+
+    for(i=0; i<n; i++) {
         printf("\nEnter burst time of process: ");  //Burst time as Input
         scanf("%d",&bt[i]);
     }
+
     for(i=0; i<n; i++)
         x[i]=bt[i];
 
     bt[9]=9999;
-    for(time=0; count!=n; time++)
-    {
+    for(time=0; count!=n; time++) {
         smallest=9;
-        for(i=0; i<n; i++)
-        {
+        for(i=0; i<n; i++) {
             if(at[i]<=time && bt[i]<bt[smallest] && bt[i]>0 )
                 smallest=i;
         }
         bt[smallest]--;
 
-        if(bt[smallest]==0)
-        {
+        if(bt[smallest]==0) {
             count++;
             end=time+1;
             completion[smallest] = end;
@@ -46,16 +43,18 @@ int main()
     }
    
     printf("Process\tarrival-time\tburst-time\twaiting-time\tturnaround-time\t\n");
-    for(i=0; i<n; i++)
-    {
+
+    for(i=0; i<n; i++) {
         printf("p[%d]\t\t%d\t\t%d\t\t%d\t\t%d\t\t\n ",i+1,at[i],x[i],wt[i],tat[i]);
         avg_wt = avg_wt + wt[i];
         avg_tat = avg_tat + tat[i];
     }
+
     printf("\n\nAverage waiting time =%f\n",avg_wt/n);
     printf("  Average Turnaround time =%f",avg_tat/n);
     printf("\n");
    
+   return 0;
 }
 
 /* OUTPUT:-
