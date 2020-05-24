@@ -4,42 +4,47 @@
 #include<iostream>
 using namespace std;
 
+class process {
+    public:
+        int at, bt, ct, wt, tat;
+};
+
 int main() {
     int n;
+    double total_tat = 0.0, total_wt = 0.0;
+
     cout<<"Enter number of processes : ";
     cin>>n;
-
-    int ct[20], at[50], wt[50], bt[50], tat[5];
-    double total_tat = 0.0, total_wt = 0.0;
+    process p[n];
 
     for(int i= 0 ;i<n; i++) {
         cout<<"\nEnter arrival time for process "<<i<<" : ";
-        cin>>at[i];
+        cin>>p[i].at;
         cout<<"Enter burst time for process "<<i<<" : ";
-        cin>>bt[i];
+        cin>>p[i].bt;
     }
 
-    ct[0] = bt[0];
-    tat[0] = ct[0] - at[0];
-    total_tat += tat[0];
-    wt[0] = tat[0] - bt[0];
-    total_wt += wt[0]; 
+    p[0].ct = p[0].bt;
+    p[0].tat = p[0].ct - p[0].at;
+    total_tat += p[0].tat;
+    p[0].wt = p[0].tat - p[0].bt;
+    total_wt += p[0].wt; 
 
     for(int i = 1; i<n; i++) {
-        ct[i] = ct[i-1] + bt[i];        //CT = BT of current + CT of previous
-        tat[i] = ct[i] - at[i];         //TAT = CT-AT
-        total_tat += tat[i];
-        wt[i] = tat[i] - bt[i];         //WT = TAT-BT
-        total_wt += wt[i];
+        p[i].ct = p[i-1].ct + p[i].bt;        //CT = BT of current + CT of previous
+        p[i].tat = p[i].ct - p[i].at;         //TAT = CT-AT
+        total_tat += p[i].tat;
+        p[i].wt = p[i].tat - p[i].bt;         //WT = TAT-BT
+        total_wt += p[i].wt;
     }
 
     cout<<"\n\nP#\tAT\tBT\tCT\tTAT\tWT\n";
     for(int i = 0; i<n; i++) {
-        cout<<i<<"\t"<<at[i]<<"\t"<<bt[i]<<"\t"<<ct[i]<<"\t"<<tat[i]<<"\t"<<wt[i]<<"\n";
+        cout<<i<<"\t"<<p[i].at<<"\t"<<p[i].bt<<"\t"<<p[i].ct<<"\t"<<p[i].tat<<"\t"<<p[i].wt<<"\n";
     }
 
     cout<<"\nAvg TAT : "<<total_tat/n<<"\n";
-    cout<<"Avg WT : "<<total_wt/n)<<"\n";
+    cout<<"Avg WT : "<<total_wt/n<<"\n";
 
     return 0;
 }
