@@ -38,8 +38,8 @@ int main() {
         cout<<i<<"\t"<<at[i]<<"\t"<<bt[i]<<"\t"<<ct[i]<<"\t"<<tat[i]<<"\t"<<wt[i]<<"\n";
     }
 
-    cout<<"\nAvg TAT : "<<float(total_tat / n)<<"\n";
-    cout<<"Avg WT : "<<float(total_wt / n)<<"\n";
+    cout<<"\nAvg TAT : "<<total_tat/n<<"\n";
+    cout<<"Avg WT : "<<total_wt/n)<<"\n";
 
     return 0;
 }
