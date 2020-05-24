@@ -1,99 +1,66 @@
-#include<stdio.h>
-#define max 5
+#include<iostream>
+#include<unistd.h>
+#include<sys/wait.h>
+using namespace std;
 
-void accept(int a[max], int n)
-{
-	int i;
-	for(i=0; i<n; i++)
-	{
-		scanf("%d", &a[i]);
-	}
+void display(int arr[], int n) {
+    for(int i = 0; i<n; i++) {
+        cout<<arr[i]<<" ";
+    }
+    cout<<"\n\n";
 }
 
-void display(int a[max], int n)
-{
-	int i;
-	for(i=0; i<n; i++)
-	{
-		printf("%d  ", a[i]);
-	}
+void asc(int arr[], int n) {
+    for(int i = 0; i<n; i++) {
+        for(int j = i+1; j<n; j++) {
+            if(arr[j] < arr[i]) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }  
+    display(arr, n);
+} 
+
+void desc(int arr[], int n) {
+    for(int i = 0; i<n; i++) {
+        for(int j = i+1; j<n; j++) {
+            if(arr[j] > arr[i]) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }  
+    display(arr, n);
 }
 
-void ascending(int a[max], int n)
-{
-	int i, j, temp;
-	for(i=0; i<n-1; i++)
-	{
-		for(j=0; j<n-i-1; j++)
-		{
-			if(a[j]>a[j+1])
-			{
-				temp= a[j];
-				a[j]= a[j+1];
-				a[j+1]=temp;
-			}
-		}
-	}
+int main() {
+    int n;
+    cout<<"Enter number of elements : ";
+    cin>>n;
+    int arr[n];
+    cout<<"\nEnter n elements : \n";
+    for(int i=0; i<n; i++) {
+        cin>>arr[i];
+    }
+    
+    cout<<"\n";
+    pid_t pid = fork();
+
+    if(pid > 0) {
+        //wait(NULL);                               if want paremt process to wait while child executes
+        cout<<"This is the parent process\n";
+        asc(arr, n);
+
+    } else if(pid == 0) {
+        cout<<"This is the child process\n";
+        desc(arr, n);
+        
+    } else {
+        cout<<"Failed to fork\n";
+    }
+
+    return 0;
 }
-
-void descending(int a[max], int n)
-{
-	int i, j, temp;
-	for(i=0; i<n-1; i++)
-	{
-		for(j=0; j<n-i-1; j++)
-		{
-			if(a[j]<a[j+1])
-			{
-				temp= a[j];
-				a[j]= a[j+1];
-				a[j+1]=temp;
-			}
-		}
-	}
-}
-
-int main()
-{
-	int ch, a[max], n;
-	//int pid();
-	printf("\nEnter  number of elements: ");
-	scanf("%d", &n);
-	accept(a, n);
-	printf("\nEnter operation to perform:\n1. Arrange in Ascending order\n2. Arrange in Descending order");
-	scanf("%d", &ch);
-	switch(ch)
-	{	
-		case 1:
-			ascending(a, n);
-			display(a, n);
-			break;
-		
-		case 2:
-			descending(a, n);
-			display(a, n);
-			break;
-		
-		default:
-			printf("\nEnter valid option");
-			break;	
-	}
-}
-
-
-
-/*Enter  number of elements: 4
-
- 10
- 5
- 20
- 15
- Enter operation to perform:\n1. Arrange in Ascending order\n2. Arrange in Descending order: 1
-
- 5 10 15 20
-
- Enter operation to perform:\n1. Arrange in Ascending order\n2. Arrange in Descending order: 2
-
- 20 15 10 5*/
-
-
