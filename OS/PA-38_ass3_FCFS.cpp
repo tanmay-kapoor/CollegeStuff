@@ -1,75 +1,74 @@
 //PA 38
 //Tanmay Kapoor
-#include<stdio.h>
+
+#include<iostream>
+using namespace std;
 
 int main() {
-    int bt[10]={0},at[10]={0},tat[10]={0},wt[10]={0},ct[10]={0};
-    int n,sum=0;
-    float total_TAT=0,total_WT=0;
+    int n;
+    cout<<"Enter number of processes : ";
+    cin>>n;
 
-    printf("Enter no. of processes\n");
-    scanf("%d",&n);
+    int ct[20], at[50], wt[50], bt[50], tat[5];
+    double total_tat = 0.0, total_wt = 0.0;
 
-    printf("Enter arrival time and burst time for each process\n");
-
-    for(int i=0;i<n;i++) {
-        printf("Arrival time of process[%d] ",i+1);
-        scanf("%d",&at[i]);
-        printf("Burst time of process[%d] ",i+1);
-        scanf("%d",&bt[i]);
-        printf("\n");
+    for(int i= 0 ;i<n; i++) {
+        cout<<"\nEnter arrival time for process "<<i<<" : ";
+        cin>>at[i];
+        cout<<"Enter burst time for process "<<i<<" : ";
+        cin>>bt[i];
     }
 
-    //calculate completion time of processes
-    for(int j=0;j<n;j++) {
-        sum+=bt[j];
-        ct[j]+=sum;
+    ct[0] = bt[0];
+    tat[0] = ct[0] - at[0];
+    total_tat += tat[0];
+    wt[0] = tat[0] - bt[0];
+    total_wt += wt[0]; 
+
+    for(int i = 1; i<n; i++) {
+        ct[i] = ct[i-1] + bt[i];        //CT = BT of current + CT of previous
+        tat[i] = ct[i] - at[i];         //TAT = CT-AT
+        total_tat += tat[i];
+        wt[i] = tat[i] - bt[i];         //WT = TAT-BT
+        total_wt += wt[i];
     }
 
-    //calculate turnaround time and waiting times
-    for(int k=0;k<n;k++) {
-        tat[k]=ct[k]-at[k];
-        total_TAT+=tat[k];
+    cout<<"\n\nP#\tAT\tBT\tCT\tTAT\tWT\n";
+    for(int i = 0; i<n; i++) {
+        cout<<i<<"\t"<<at[i]<<"\t"<<bt[i]<<"\t"<<ct[i]<<"\t"<<tat[i]<<"\t"<<wt[i]<<"\n";
     }
 
-    for(int k=0;k<n;k++) {
-        wt[k]=tat[k]-bt[k];
-        total_WT+=wt[k];
-    }
-
-    printf("Solution: \n\n");
-    printf("P#\t AT\t BT\t CT\t TAT\t WT\t\n\n");
-
-    for(int i=0;i<n;i++)
-        printf("P%d\t %d\t %d\t %d\t %d\t %d\n",i+1,at[i],bt[i],ct[i],tat[i],wt[i]);
-
-    printf("\n\nAverage Turnaround Time = %f\n",totalTAT/n);
-    printf("Average WT = %f\n\n",totalWT/n);
+    cout<<"\nAvg TAT : "<<float(total_tat / n)<<"\n";
+    cout<<"Avg WT : "<<float(total_wt / n)<<"\n";
 
     return 0;
 }
 /* output
-Enter number of processes       3
-Enter arrival time and burst time for each process
+Enter number of processes : 5
 
-Arrival time of process[1]      1
-Burst time of process[1]        3
+Enter arrival time for process 0 : 0
+Enter burst time for process 0 : 2
 
-Arrival time of process[2]      2
-Burst time of process[2]        4
+Enter arrival time for process 1 : 1
+Enter burst time for process 1 : 6
 
-Arrival time of process[3]      3
-Burst time of process[3]        5
+Enter arrival time for process 2 : 2
+Enter burst time for process 2 : 4
 
-Solution:
+Enter arrival time for process 3 : 3
+Enter burst time for process 3 : 9
 
-P#       AT      BT      CT      TAT     WT
-
-P1       1       3       3       2       -1
-P2       2       4       7       5       1
-P3       3       5       12      9       4
+Enter arrival time for process 4 : 4
+Enter burst time for process 4 : 12
 
 
-Average Turnaround Time = 5.333333
-Average WT = 1.333333
+P#      AT      BT      CT      TAT     WT
+0       0       2       2       2       0
+1       1       6       8       7       1
+2       2       4       12      10      6
+3       3       9       21      18      9
+4       4       12      33      29      17
+
+Avg TAT : 13.2
+Avg WT : 6.6
 */
