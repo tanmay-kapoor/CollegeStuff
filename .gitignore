@@ -1,0 +1,6 @@
+/WTL/lab7_node/node_modules
+/WTL/lab7_node_rest-api/node_modules
+npm-debug.log
+.DS_Store
+/*.env
+/public/uploads

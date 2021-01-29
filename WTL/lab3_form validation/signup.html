@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quattrocento+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+
+    <form class="login-form" action="signup.html">
+      <h1>SignUp</h1>
+
+      <div class="txtb">
+          <input type="text" placeholder="Username" id="username">
+      </div>
+
+      <div class="txtb">
+        <input type="email" placeholder="Email" id="email">
+      </div>
+
+      <div class="txtb">
+        <input type="number" placeholder="Phone number" id="phone">
+      </div>
+
+      <div class="txtb">
+        <input type="password" placeholder="Password" id="password">
+      </div>
+
+      <div class="show-password">
+        <input type="checkbox" id="password-checkbox" name="password-checkbox" value="invisible">
+        <label for="password-checkbox"> Show password</label><br>
+      </div>
+
+      <div class="txtb">
+        <input type="password" placeholder="Confirm password" id="confirm-password">
+      </div>
+
+      <input type="submit" class="btn btn-outline-light btn-lg btn-block login-btn" value="Submit"></button>
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/signup.js"></script>
+  </body>
+</html>

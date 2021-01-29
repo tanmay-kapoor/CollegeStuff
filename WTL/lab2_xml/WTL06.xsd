@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:element name="books">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element maxOccurs="unbounded" ref="book"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+<xsd:element name="book">
+	<xsd:complexType>
+		<xsd:sequence>
+			 <xsd:element name="title" type="xsd:string" />
+			 <xsd:element name="category" type="xsd:string" />
+			 <xsd:element name="author" type="xsd:string" />
+			 <xsd:element name="publisher" type="xsd:string" />
+			 <xsd:element name="year" type="xsd:positiveInteger" />
+			 <xsd:element name="isbn" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+</xsd:schema>
